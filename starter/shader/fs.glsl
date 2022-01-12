@@ -18,7 +18,7 @@ vec2 map (vec3 p, float time)
 { 
     vec2 res = vec2(1e10, 0.0);
 
-    p = p + vec3(0.0, -3.5, 15.0);
+    p = p + vec3(0.0, 0.0, 15.0);
     
     res = vec2(sdRoundBox(p, vec3(0.5), 0.0), 15.0);
 
@@ -57,7 +57,7 @@ vec3 calcNormal( in vec3 p, float time )
                         map(p+h.yyx, time).x - map(p-h.yyx, time).x ) );
 }
 
-vec3 render(in vec3 ro, in vec3 rd, in vec3 rdx, in vec3 rdy, float time) 
+vec3 render(in vec3 ro, in vec3 rd, float time) 
 { 
     vec3 col = vec3(0.95);
 
@@ -87,8 +87,8 @@ mat3 setCamera( in vec3 ro, in vec3 ta, float cr )
 
 void main() {
     // camera
-    vec3 ro = vec3( 0.0, 3.5, 1.0);
-    vec3 ta = vec3( 0.0, 3.5, 0.0);
+    vec3 ro = vec3( 0.0, 0.0, 1.0);
+    vec3 ta = vec3( 0.0, 0.0, 0.0);
 
     mat3 ca = setCamera(ro, ta, 0.0);
     float aspect = uResolution.x / uResolution.y;
@@ -97,16 +97,10 @@ void main() {
     float time = uTime;
 
     // ray direction
-    vec3 rd = ca * normalize( vec3(p, 5.2) );
+    vec3 rd = ca * normalize( vec3(p, 5.0) );
 
-    // ray differentials 
-    vec2 px =  vec2(aspect, 1.0) * ( (vUv+vec2(1.0,0.0)) - vec2(0.5));
-    vec2 py =  vec2(aspect, 1.0) * ( (vUv+vec2(0.0,1.0)) - vec2(0.5));
-    vec3 rdx = ca * normalize( vec3(px, 1.0));
-    vec3 rdy = ca * normalize( vec3(py, 1.0));
+    vec3 col = render( ro, rd, time );
+    col = pow(color, vec3(0.4545));
 
-    vec3 color = render( ro, rd, rdx, rdy, time );
-    color = pow(color, vec3(0.4545));
-
-    o_FragColor = vec4( color, 1.0 );
+    o_FragColor = vec4( col, 1.0 );
 }

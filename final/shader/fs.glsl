@@ -380,8 +380,7 @@ float calcSoftshadow( in vec3 ro, in vec3 rd, float mint, float maxt, float k, f
 
 /*
  
-                                                                                                            
-                                                                                                            
+                                                                                                                                                                                                     
  `7MM"""Mq.  `7MM"""YMM  `7MN.   `7MF'`7MM"""Yb. `7MM"""YMM  `7MM"""Mq.  `7MMF'`7MN.   `7MF' .g8"""bgd      
    MM   `MM.   MM    `7    MMN.    M    MM    `Yb. MM    `7    MM   `MM.   MM    MMN.    M .dP'     `M      
    MM   ,M9    MM   d      M YMb   M    MM     `Mb MM   d      MM   ,M9    MM    M YMb   M dM'       `      
